@@ -50,6 +50,19 @@ static int ParseCommandLine(char *line, char **argv, int max_argc)
 }
 
 void CreateConsole();
+int APIENTRY main(int argc, char **argv)
+{
+	/* Set system timer resolution to 1ms. */
+	timeBeginPeriod(1);
+
+	CrashLog::InitialiseCrashLog();
+	int ret = openttd_main(argc, argv);
+
+/* Restore system timer resolution. */
+	timeEndPeriod(1);
+
+	return ret;
+}
 
 int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {

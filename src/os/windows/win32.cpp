@@ -234,6 +234,7 @@ void CreateConsole()
 	if (_has_console) return;
 	_has_console = true;
 
+	if (AttachConsole(ATTACH_PARENT_PROCESS)) return;
 	if (!AllocConsole()) return;
 
 	hand = GetStdHandle(STD_OUTPUT_HANDLE);
